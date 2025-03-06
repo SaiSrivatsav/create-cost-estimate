@@ -1,0 +1,20 @@
+//@ui5-bundle re/fin/createcostestimate/Component-preload.js
+sap.ui.require.preload({
+	"re/fin/createcostestimate/Component.js":function(){
+sap.ui.define(["sap/ui/core/UIComponent","re/fin/createcostestimate/model/models"],(e,t)=>{"use strict";return e.extend("re.fin.createcostestimate.Component",{metadata:{manifest:"json",interfaces:["sap.ui.core.IAsyncContentCreation"]},init(){e.prototype.init.apply(this,arguments);this.setModel(t.createDeviceModel(),"device");this.getRouter().initialize()}})});
+},
+	"re/fin/createcostestimate/controller/App.controller.js":function(){
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("re.fin.createcostestimate.controller.App",{onInit(){}})});
+},
+	"re/fin/createcostestimate/controller/Main.controller.js":function(){
+sap.ui.define(["sap/ui/core/mvc/Controller"],e=>{"use strict";return e.extend("re.fin.createcostestimate.controller.Main",{onInit(){}})});
+},
+	"re/fin/createcostestimate/i18n/i18n.properties":'# This is the resource bundle for re.fin.createcostestimate\n\n#Texts for manifest.json\n\n#XTIT: Application name\nappTitle=Create Cost Estimate\n\n#YDES: Application description\nappDescription=Material Cost Estimate Application\n#XTIT: Main view title\ntitle=Create Cost Estimate\n\n#XFLD,60\nmatcostest-create.flpTitle=Create Cost Estimate\n\n#XFLD,33\nmatcostest-create.flpSubtitle=Application\n',
+	"re/fin/createcostestimate/manifest.json":'{"_version":"1.65.0","sap.app":{"id":"re.fin.createcostestimate","type":"application","i18n":"i18n/i18n.properties","applicationVersion":{"version":"0.0.1"},"title":"{{appTitle}}","description":"{{appDescription}}","resources":"resources.json","sourceTemplate":{"id":"@sap/generator-fiori:basic","version":"1.16.5","toolsId":"7f8ff7d6-6ec0-43d2-9456-77defcdb381a"},"dataSources":{"mainService":{"uri":"cost-estimate-tracker/","type":"OData","settings":{"annotations":[],"odataVersion":"4.0"}}},"crossNavigation":{"inbounds":{"matcostest-create":{"semanticObject":"matcostest","action":"create","title":"{{matcostest-create.flpTitle}}","subTitle":"{{matcostest-create.flpSubtitle}}","signature":{"parameters":{},"additionalParameters":"allowed"}}}}},"sap.ui":{"technology":"UI5","icons":{"icon":"","favIcon":"","phone":"","phone@2":"","tablet":"","tablet@2":""},"deviceTypes":{"desktop":true,"tablet":true,"phone":true}},"sap.ui5":{"flexEnabled":true,"dependencies":{"minUI5Version":"1.133.0","libs":{"sap.m":{},"sap.ui.core":{}}},"contentDensities":{"compact":true,"cozy":true},"models":{"i18n":{"type":"sap.ui.model.resource.ResourceModel","settings":{"bundleName":"re.fin.createcostestimate.i18n.i18n"}},"":{"dataSource":"mainService","preload":true,"settings":{"operationMode":"Server","autoExpandSelect":true,"earlyRequests":true}}},"resources":{"css":[{"uri":"css/style.css"}]},"routing":{"config":{"routerClass":"sap.m.routing.Router","controlAggregation":"pages","controlId":"app","transition":"slide","type":"View","viewType":"XML","path":"re.fin.createcostestimate.view"},"routes":[{"name":"RouteMain","pattern":":?query:","target":["TargetMain"]}],"targets":{"TargetMain":{"id":"Main","name":"Main"}}},"rootView":{"viewName":"re.fin.createcostestimate.view.App","type":"XML","id":"App"}},"sap.cloud":{"public":true,"service":"costest-router"}}',
+	"re/fin/createcostestimate/model/models.js":function(){
+sap.ui.define(["sap/ui/model/json/JSONModel","sap/ui/Device"],function(e,n){"use strict";return{createDeviceModel:function(){var i=new e(n);i.setDefaultBindingMode("OneWay");return i}}});
+},
+	"re/fin/createcostestimate/view/App.view.xml":'<mvc:View controllerName="re.fin.createcostestimate.controller.App"\n    displayBlock="true"\n    xmlns:mvc="sap.ui.core.mvc"\n    xmlns="sap.m"><App id="app"></App></mvc:View>',
+	"re/fin/createcostestimate/view/Main.view.xml":'<mvc:View controllerName="re.fin.createcostestimate.controller.Main"\n    xmlns:mvc="sap.ui.core.mvc"\n    xmlns="sap.m"><Page id="page" title="{i18n>title}"></Page></mvc:View>'
+});
+//# sourceMappingURL=Component-preload.js.map
