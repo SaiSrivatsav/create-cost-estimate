@@ -90,7 +90,7 @@ resources:
   parameters:
     config:
       tenant-mode: dedicated
-      xsappname: create-cost-estimate-${org}-${space}
+      xsappname: create-cost-estimate-${space}
     path: ./xs-security.json
     service: xsuaa
     service-plan: application
