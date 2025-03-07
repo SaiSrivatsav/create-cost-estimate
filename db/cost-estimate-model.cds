@@ -5,6 +5,8 @@ entity CostEstimateStatus: cuid, managed{
     referenceId: String;
     material: String(40);
     plant: String(4);
+    costingFromDate: Date;
+    costingToDate: Date;
     status: String;
     systemStatus: String;
     noOfErrors: Integer;
