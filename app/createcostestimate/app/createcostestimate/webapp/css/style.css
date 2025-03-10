@@ -1,8 +1,0 @@
-@keyframes rotateIcon {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(359deg); }
-}
-
-.mySpinningIcon .sapUiIcon {
-    animation: rotateIcon 2s linear infinite; /* adjust duration and easing as needed */
-}
