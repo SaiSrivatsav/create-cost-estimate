@@ -1,0 +1,20 @@
+<mvc:View xmlns:form="sap.ui.layout.form" controllerName="re.fin.createcostestimate.controller.Main" 
+    xmlns:f="sap.f" 
+    xmlns:core="sap.ui.core" 
+    xmlns:filterbar="sap.ui.comp.filterbar" 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <f:DynamicPage headerExpanded="true" backgroundDesign="Standard">
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <core:Fragment fragmentName="re.fin.createcostestimate.view.fragments.FilterBar" type="XML" />
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <core:Fragment fragmentName="re.fin.createcostestimate.view.fragments.CostEstimateTable" type="XML" />
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>

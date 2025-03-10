@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:FragmentDefinition xmlns:f="sap.f" 
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core" 
+    xmlns:filterbar="sap.ui.comp.filterbar" 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <filterbar:FilterBar>
+        <filterbar:filterGroupItems>
+            <!-- Material -->
+            <filterbar:FilterGroupItem groupName="FilterGrp" name="Material" label="Material" visibleInFilterBar="true">
+                                <filterbar:control>
+                                    <Input id="refin-idMaterialFilter" value="{Filter>/material}" showValueHelp="true" valueHelpRequest="onMaterialReq"></Input>
+                                </filterbar:control>                    
+                            </filterbar:FilterGroupItem>
+                            <!-- Plant -->
+                            <filterbar:FilterGroupItem groupName="FilterGrp" name="Plant" label="Plant" visibleInFilterBar="true">
+                                <filterbar:control>
+                                    <Input id="refin-idPlantFilter" value="{Filter>/plant}" showValueHelp="true" valueHelpRequest="onPlantReq"></Input>
+                                </filterbar:control>
+                            </filterbar:FilterGroupItem>
+                            <!-- Date Range Selection -->
+                            <filterbar:FilterGroupItem groupName="FilterGrp" name="Date Range" label="Creation Date" visibleInFilterBar="true">
+                                <filterbar:control>
+                                    <DateRangeSelection id="refin-idDateRangeFilter"
+                                                        value="{
+                                                        'type': 'sap.ui.model.type.DateInterval',
+                                                        'formatOptions': {
+                                                                'pattern': 'yyyy/MM/dd'
+                                                            },
+                                                            'parts':[
+                                                                {
+                                                                    'type': 'sap.ui.model.type.Date',
+                                                                    'path': '{Filter>startDate}'
+                                                                },
+                                                                {
+                                                                    'type': 'sap.ui.model.type.Date',
+                                                                    'path': '{Filter>endDate}'
+                                                                }
+                                                            ]
+                                                        }">
+                                    </DateRangeSelection>
+                                </filterbar:control>                    
+                            </filterbar:FilterGroupItem>
+                            <!-- Status -->
+                            <filterbar:FilterGroupItem groupName="FilterGrp" name="Status" label="Status" visibleInFilterBar="true">
+                                <filterbar:control>
+                                    <ComboBox selectedKey="{Filter>/status}">
+                                        <items>
+                                            <core:Item key="SUBMITTED" text="SUBMITTED"></core:Item>
+                                            <core:Item key="SUCCESS" text="SUCCESS"></core:Item>
+                                            <core:Item key="ERROR" text="ERROR"></core:Item>
+                                            <core:Item key="COMPLETED" text="COMPLETED"></core:Item>
+                                        </items>
+                                    </ComboBox>
+                                </filterbar:control>
+            </filterbar:FilterGroupItem>
+        </filterbar:filterGroupItems>
+    </filterbar:FilterBar>
+</core:FragmentDefinition>

@@ -1,0 +1,20 @@
+{
+  "name": "{{app}}"{{#hasUI5}},
+  "version": "1.0.0",
+  "main": "webapp/index.html",
+  "scripts": {
+    "build": "ui5 build preload --clean-dest --config ui5-deploy.yaml",
+    "build-local": "ui5 build preload --clean-dest",
+    "start": "ui5 serve"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^4",
+    "ui5-task-zipper": "^3"
+  },
+  "ui5": {
+    "dependencies": [
+      "ui5-task-zipper"
+    ]
+  }
+  {{/hasUI5}}
+}

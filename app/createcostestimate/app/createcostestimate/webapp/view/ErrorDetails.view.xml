@@ -1,0 +1,85 @@
+<mvc:View controllerName="re.fin.createcostestimate.controller.ErrorDetail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap">
+    <!-- <Page id="idpage2" showNavButton="true" navButtonPress="onNavBack"> -->
+    <uxap:ObjectPageLayout id="refin-idErrorDetPage"
+            enableLazyLoading="false"
+            showTitleInHeaderContent="true"
+            showEditHeaderButton="false"
+            showHeaderContent="true"
+            headerContentPinned="true"
+            showFooter="true">
+
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle >
+                <uxap:expandedHeading>
+                    <Title text="Material" wrapping="true"></Title>
+                </uxap:expandedHeading>
+
+                <uxap:expandedContent>
+                    <Label text="Plant"></Label>
+                </uxap:expandedContent>
+
+                <uxap:snappedHeading>
+                    <HBox >
+                        <VBox >
+                            <Avatar class="sapUiSmallMarginEnd" 
+                                    displayShape="Circle"
+                                    src="sap-icon://add-product"></Avatar>
+                        </VBox>
+                        <VBox >
+                            <Title text="Material" wrapping="true"></Title>
+                            <Label text="Plant"></Label>                         
+                        </VBox>
+                    </HBox>
+                </uxap:snappedHeading>
+            </uxap:ObjectPageDynamicHeaderTitle>            
+        </uxap:headerTitle>
+
+        <uxap:headerContent>
+            <HBox class="sapUiSmallMarginEnd">
+                <Avatar class="sapUiMediumMarginEnd sapUiSmallMarginBottom" 
+                        displayShape="Circle"
+                        displaySize="L"
+                        src="{ parts : ['Paymentreq>/TransactionType'], formatter: '.formatter.setObjectPageIcon'}">
+                </Avatar>
+
+                <VBox class="sapUiMediumMarginEnd">
+                    <Title class="sapUiTinyMarginBottom" text="Document Date"></Title>
+                    <ObjectStatus id="idDocDate" text="{Paymentreq>/Docdate}" class="sapMObjectStatusLarge"></ObjectStatus>
+                </VBox>
+
+                <VBox class="sapUiMediumMarginEnd">
+                    <Title class="sapUiTinyMarginBottom" text="Amount"></Title>
+                    <ObjectStatus id="idTotalAmount" text="0.00" state="Warning" class="sapMObjectStatusLarge"></ObjectStatus>
+                </VBox>
+            </HBox>
+        </uxap:headerContent>
+
+        <uxap:sections>
+        <!-- Payment Header Section -->
+            <uxap:ObjectPageSection titleUppercase="false" title="Error Details">                
+                <uxap:subSections>                    
+                    <uxap:ObjectPageSubSection>
+                        <uxap:blocks>
+                            <core:Fragment fragmentName="fi.manualpayments.view.fragments.PaymentHeader" type="XML" />
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+        <!-- Footer Section -->
+        <uxap:footer>
+            <OverflowToolbar id="idFooterToolbar">
+                <Button id="idErrorLog" icon="sap-icon://status-error" type="Reject" press="handleMessagePopoverPress" visible="false"/>
+				<ToolbarSpacer/>
+				<Button type="Default" text="{i18n>draftButton}" press="onDraftSave"/>
+				<Button type="Accept" text="{i18n>submitButton}" press="onSubmitDoc"/>
+				<Button type="Reject" text="{i18n>cancelButton}" press="onPressCancel"/>
+            </OverflowToolbar>
+        </uxap:footer>
+    </uxap:ObjectPageLayout>
+    <!-- </Page> -->
+</mvc:View>

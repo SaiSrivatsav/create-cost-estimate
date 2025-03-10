@@ -1,0 +1,28 @@
+{{- if .Values.expose.enabled -}}
+{{- if .Values.expose.APIRule.experimental -}}
+apiVersion: gateway.kyma-project.io/v2alpha1
+{{ else }}
+apiVersion: gateway.kyma-project.io/v1beta1
+{{- end }}
+kind: APIRule
+metadata:
+  name: {{ include "web-application.fullname" . }}
+  labels: {{- include "web-application.labels" . | nindent 4 }}
+spec:
+  gateway: {{ tpl .Values.expose.gateway $ }}
+  {{- if .Values.expose.APIRule.experimental }}
+  hosts:
+    {{- include "web-application.internal.exposeHosts" . | indent 4 }}
+  {{- else }}
+  host: {{ include "web-application.internal.exposeHost" . }}
+  {{- end }}
+  service:
+    name: {{ include "web-application.fullname" . }}
+    port: {{ .Values.port }}
+  rules:
+    {{- tpl (toYaml .Values.expose.rules) $ | nindent 4 }}
+  {{- if .Values.expose.corsPolicy }}
+  corsPolicy:
+    {{- toYaml .Values.expose.corsPolicy | nindent 4 }}
+  {{- end }}
+{{- end }}

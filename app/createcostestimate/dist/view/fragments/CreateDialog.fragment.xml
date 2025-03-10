@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<core:FragmentDefinition xmlns:f="sap.f" 
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core" 
+    xmlns:filterbar="sap.ui.comp.filterbar" 
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+
+    <Dialog id="refin-idCreateDialog" icon="" title="Create Cost Estimation" titleAlignment="Center" contentWidth="100%">
+        <content>
+            <form:SimpleForm id="refin-idCreateForm" 
+                        title="Input Required"
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanXL="4"
+                        labelSpanL="4"
+                        labelSpanM="12"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="0"
+                        emptySpanL="0"
+                        emptySpanM="0"
+                        emptySpanS="0"
+                        columnsXL="2"
+                        columnsL="2"
+                        columnsM="1"
+                        
+                        singleContainerFullSize="false">
+                <form:content>
+
+                    <core:Title text="Material &amp; Plant Details"></core:Title>
+
+                    <Label text="Material Number"></Label>
+                    <HBox >
+                        <Input id="refin-idCreateMaterial" required="true" value="{CreateModel>/material}" showValueHelp="true" valueHelpRequest="onMaterialReq"></Input>
+                        <Label class="sapUiTinyMargin" text="{CreateModel>/materialName}"></Label>                
+                    </HBox>
+                    
+
+                    <Label text="Plant"></Label>
+                    <HBox>
+                        <Input id="refin-idCreatePlant" required="true" value="{CreateModel>/plant}" showValueHelp="true" valueHelpRequest="onPlantReq"></Input>
+                        <Label class="sapUiTinyMargin" text="{CreateModel>/plantName}"></Label>
+                    </HBox>
+
+
+                    <core:Title text="Costing Data"></core:Title>
+
+                    <Label text="Costing Variant"></Label>
+                    <Input editable="false" value="PPC1" width="30%" maxLength="4"></Input>
+
+                    <Label text="Costing Version"></Label>
+                    <Input editable="false" value="001" width="20%" maxLength="3"></Input>
+
+                    <Label text="Costing From Date"></Label>
+                    <DatePicker id="refin-idCreateFromDate" width="50%" editable="false" value="{CreateModel>/costingFromDate}"></DatePicker>
+
+                    <Label text="Costing To Date"></Label>
+                    <DatePicker id="refin-idCreateToDate" width="50%" editable="false" value="{CreateModel>/costingToDate}"></DatePicker>
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <footer>
+            <OverflowToolbar >
+                <ToolbarSpacer />
+                <Button id="refin-idSubmit" text="Submit" type="Emphasized" press="onSubmit"></Button>
+                <Button id="refin-idCancelForm" press="onCancelDialog" text="Cancel" type="Default"></Button>
+            </OverflowToolbar>
+        </footer>
+    </Dialog>
+</core:FragmentDefinition>
