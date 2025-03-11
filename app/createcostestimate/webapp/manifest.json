@@ -127,13 +127,27 @@
           "target": [
             "TargetMain"
           ]
+        },
+        {
+          "name": "RouteErrorDetail",
+          "pattern": "Errors/{parentId}",
+          "target": [
+              "TargetErrorDetails"
+          ]
         }
       ],
       "targets": {
         "TargetMain": {
           "id": "Main",
           "name": "Main"
-        }
+        },
+        "TargetErrorDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "ErrorDetails",
+          "viewName": "ErrorDetails"
+      }
       }
     },
     "rootView": {

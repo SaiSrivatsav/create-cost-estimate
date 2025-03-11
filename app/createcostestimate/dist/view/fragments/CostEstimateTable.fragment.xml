@@ -5,7 +5,7 @@
     xmlns:filterbar="sap.ui.comp.filterbar" 
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-<Table id="refin-idMainTable" alternateRowColors="true" mode="MultiSelect"  inset="false" items="{Records>/}">
+<Table id="refin-idMainTable" alternateRowColors="false" mode="MultiSelect"  inset="false" items="{Records>/}">
                 <headerToolbar>
                     <OverflowToolbar >
                         <Title text="Cost Estimate Records" level="H2"></Title>

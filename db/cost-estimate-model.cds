@@ -18,16 +18,18 @@ entity CostEstimateStatus: cuid, managed{
 
 entity ErrorLogs: cuid, managed{
     referenceId: String;
-    parentId: UUID;
-    errorId: String;
+    parentId: UUID @mandatory;
+    errorId: String @mandatory;
+    type: String @mandatory;
     description: String;
-    message: String;
+    message: String @mandatory;
     assignedDepartment: String;
     assignedOn: DateTime;
     departmentMail: String;
     resolvedBy: String;
     resolvedOn: DateTime;
     resolutionStatus: String;
+    recentNotif: String;
 };
 
 

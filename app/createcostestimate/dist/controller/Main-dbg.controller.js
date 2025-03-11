@@ -44,7 +44,7 @@ sap.ui.define([
             BusyIndicator.show();
             const sUri = this.getOwnerComponent().getManifestObject().resolveUri(this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri);
             try {
-                const response = await fetch(sUri + "/CostEstimateLog");
+                const response = await fetch(sUri + "/CostEstimateLog?$expand=errorLogs"); 
                 if (!response.ok) {
                     let errorText = await response.text();
                 }else{
@@ -60,27 +60,27 @@ sap.ui.define([
                         case "SUCCESS":
                             element.getCells()[5].setIcon("sap-icon://verified");
                             element.getCells()[5].setState("Success");
-                            element.setType("Inactive");
+                            element.getCells()[6].setVisible(true);                            
                             break;
                         case "COMPLETED":
                             element.getCells()[5].setIcon("sap-icon://complete");
                             element.getCells()[5].setState("Information");
-                            element.setType("Inactive");
+                            element.getCells()[6].setVisible(false);                            
                             break;
                         case "ERROR":
                             element.getCells()[5].setIcon("sap-icon://status-error");
-                            element.getCells()[5].setState("Error"); 
-                            element.getCells()[5].setType("Navigation");
+                            element.getCells()[5].setState("Error");
+                            element.getCells()[6].setVisible(false);
                             break;
                         case "SUBMITTED":
                             element.getCells()[5].setIcon("sap-icon://in-progress");
                             element.getCells()[5].setState("Warning");
-                            element.setType("Inactive");
+                            element.getCells()[6].setVisible(false);                            
                             break;
                         case "CANCELLED":
                             element.getCells()[5].setIcon("sap-icon://cancel");
                             element.getCells()[5].setState("Indication02");
-                            element.setType("Inactive");
+                            element.getCells()[6].setVisible(false);                            
                             break;
                         default:
                             break;
@@ -93,7 +93,12 @@ sap.ui.define([
         },
 
         onItemNavigate(oEvent){
-
+            const selectedIndex = oEvent.getSource().getBindingContext("Records").sPath.split("/")[1];
+            const parentId = this.getOwnerComponent().getModel("Records").getData()[selectedIndex].ID;
+            const oRouter = this.oRouter;
+            oRouter.navTo("RouteErrorDetail",{
+                parentId: parentId
+            });
         },
 
         onCreateCostEstimate(oEvent){
@@ -155,7 +160,15 @@ sap.ui.define([
                     
                     const cloudOp = "CREATE"                    
                     const cloudResp = await this.activateCloudOperation(cloudOp);
-                    if (cloudResp) {
+                    if (cloudResp.ID) {
+                        const parentId = cloudResp.ID;
+                        const errorLogUpdProm = await this.activateErrorLogOperation(cloudOp, parentId);
+                        const errorResponse = await Promise.all(errorLogUpdProm);
+                        // .then(function(oResp, oError){
+
+                        // }).catch(oErr => {
+
+                        // });
                         oProgressData[1].executionCompleted = true;
                         oProgressData[1].operationStatus = "DONE";
                         oProgressData[1].active = false;
@@ -170,6 +183,53 @@ sap.ui.define([
                 }
             }                                     
         },
+
+        activateErrorLogOperation(cloudOp, parentId){
+                let errorLogsPayload=[
+                    {
+                        "referenceId": "0001",
+                        "parentId": parentId,
+                        "errorId": "E101",
+                        "description": "Error test",
+                        "message": "Error Message Test",
+                        "assignedDepartment": "MDM",
+                        "assignedOn": new Date(),
+                        "departmentMail": "mdm@re.com",
+                        "resolutionStatus": "Pending"
+                    },
+                    {
+                       "referenceId": "0002",
+                        "parentId": parentId,
+                        "errorId": "E102",
+                        "description": "Error test 2",
+                        "message": "Error Message Test 2",
+                        "assignedDepartment": "MM",
+                        "assignedOn": new Date(),
+                        "departmentMail": "mm@re.com",
+                        "resolutionStatus": "Pending" 
+                    }
+                ];
+                const sUri = this.getOwnerComponent().getManifestObject().resolveUri(this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri);
+                let errorPromises=[];
+                for (let index = 0; index < errorLogsPayload.length; index++) {
+                    const element = errorLogsPayload[index];
+                    let errProm = new Promise(function(resolve,reject){
+                        $.ajax(sUri + "/ErrorLogs", {
+                            type: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(errorLogsPayload[index]),
+                            success: (response) => {
+                                resolve(response);
+                            },
+                            error: (error) => {
+                                reject(error);
+                            }
+                        });  
+                    });
+                    errorPromises.push(errProm);
+                }                
+                return errorPromises;
+            },
 
         setProgressTabProps(){
             let oProgressModel = this.getView().getModel("ProgressModel").getData();
@@ -205,19 +265,7 @@ sap.ui.define([
                 "costingToDate": this.getView().getModel("CreateModel").costingToDate,
                 "status": "ERROR",
                 "systemStatus": "SUCCESS",
-                "noOfErrors": 2,
-                "errorLogs":[
-                    {
-                        "referenceId": "0001",
-                        "errorId": "E101",
-                        "description": "Error test",
-                        "message": "Error Message Test",
-                        "assignedDepartment": "MDM",
-                        "assignedOn": new Date(),
-                        "departmentMail": "mdm@re.com",
-                        "resolutionStatus": "Pending"
-                    }
-                ]
+                "noOfErrors": 2
             };
             const sUri = this.getOwnerComponent().getManifestObject().resolveUri(this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri);
             return new Promise(function(resolve,reject){
@@ -231,8 +279,8 @@ sap.ui.define([
                     error: (error) => {
                         reject(error);
                     }
-                })  
-            })
+                });  
+            });
         },
 
         async createCostEstimate(executionId){
