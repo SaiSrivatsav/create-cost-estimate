@@ -85,6 +85,8 @@ resources:
   parameters:
     service: hana
     service-plan: hdi-shared
+  requires:
+    - name: create-cost-estimate-srv
 - name: create-cost-estimate-auth
   type: org.cloudfoundry.managed-service
   parameters:

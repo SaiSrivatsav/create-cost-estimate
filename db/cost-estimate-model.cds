@@ -7,8 +7,8 @@ entity CostEstimateStatus: cuid, managed{
     materialName: String; 
     plant: String(4) @mandatory;
     plantName: String;
-    costingFromDate: Date;
-    costingToDate: Date;
+    costingFromDate: String;
+    costingToDate: String;
     status: String @mandatory;
     systemStatus: String;
     noOfErrors: Integer;
@@ -22,14 +22,16 @@ entity ErrorLogs: cuid, managed{
     errorId: String @mandatory;
     type: String @mandatory;
     description: String;
-    message: String @mandatory;
+    message: String;
     assignedDepartment: String;
-    assignedOn: DateTime;
+    assignedOn: String;
+    assignedTime: String;
     departmentMail: String;
     resolvedBy: String;
-    resolvedOn: DateTime;
+    resolvedOn: String;
     resolutionStatus: String;
     recentNotif: String;
+    ageingText: String;
 };
 
 

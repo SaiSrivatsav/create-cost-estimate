@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+     rememberSelections="false" multiSelect="false" confirm="onPlantSelect"
+		id="idPlantDialog"
+		title="Select Plant"
+		liveChange="onSearchPlant"
+		items="{
+			path: 'PlantHelp>/'
+		}">
+		<DisplayListItem
+			label="{PlantHelp>Werks}"
+			value="{PlantHelp>Name}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

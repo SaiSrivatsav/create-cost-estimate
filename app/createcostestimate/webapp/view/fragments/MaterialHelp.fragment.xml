@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+     rememberSelections="false" multiSelect="false" confirm="onMaterialSelect"
+		id="idMaterialDialog"
+		title="Select Material"
+		liveChange="onSearchMaterial"
+		items="{
+			path: 'MaterialHelp>/'
+		}">
+		<DisplayListItem
+			label="{MaterialHelp>matnr}"
+			value="{MaterialHelp>maktx}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

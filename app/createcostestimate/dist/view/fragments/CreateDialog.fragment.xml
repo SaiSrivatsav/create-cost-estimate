@@ -33,14 +33,14 @@
                     <Label text="Material Number"></Label>
                     <HBox >
                         <Input id="refin-idCreateMaterial" required="true" value="{CreateModel>/material}" showValueHelp="true" valueHelpRequest="onMaterialReq"></Input>
-                        <Label class="sapUiTinyMargin" text="{CreateModel>/materialName}"></Label>                
+                        <Label id="refin-idCreateMatDescr" class="sapUiTinyMargin" text="{CreateModel>/materialName}"></Label>                
                     </HBox>
                     
 
                     <Label text="Plant"></Label>
                     <HBox>
                         <Input id="refin-idCreatePlant" required="true" value="{CreateModel>/plant}" showValueHelp="true" valueHelpRequest="onPlantReq"></Input>
-                        <Label class="sapUiTinyMargin" text="{CreateModel>/plantName}"></Label>
+                        <Label id="refin-idCreatePlantDescr" class="sapUiTinyMargin" text="{CreateModel>/plantName}"></Label>
                     </HBox>
 
 

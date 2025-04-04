@@ -10,6 +10,20 @@
       "csrfProtection": false
     },
     {
+      "source": "^/assignerrors/(.*)$",
+      "target": "/assignerrors/$1",
+      "destination": "COST_ESTIMATE_ERROR_MAPPINGS",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/sap/(.*)$",
+      "target": "/sap/$1",
+      "destination": "SAP_DRE",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },
+    {
       "source": "^/resources/(.*)$",
       "target": "/resources/$1",
       "authenticationType": "none",

@@ -23,6 +23,22 @@
                     "annotations": [],
                     "odataVersion": "4.0"
                 }
+            },
+            "ZBTP_API_COST_ESTIMATE_SRV": {
+                "uri": "sap/opu/odata/sap/ZBTP_API_COST_ESTIMATE_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "2.0"
+                }
+            },
+            "errorMappingService": {
+                "uri": "assignerrors/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "odataVersion": "4.0"
+                }
             }
         },
         "crossNavigation": {

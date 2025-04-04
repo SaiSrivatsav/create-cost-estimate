@@ -6,7 +6,7 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
 
-    <filterbar:FilterBar>
+    <filterbar:FilterBar showGoOnFB="true" search="onFilterSearch">
         <filterbar:filterGroupItems>
             <!-- Material -->
             <filterbar:FilterGroupItem groupName="FilterGrp" name="Material" label="Material" visibleInFilterBar="true">
@@ -48,10 +48,10 @@
                                 <filterbar:control>
                                     <ComboBox selectedKey="{Filter>/status}">
                                         <items>
-                                            <core:Item key="SUBMITTED" text="SUBMITTED"></core:Item>
-                                            <core:Item key="SUCCESS" text="SUCCESS"></core:Item>
-                                            <core:Item key="ERROR" text="ERROR"></core:Item>
-                                            <core:Item key="COMPLETED" text="COMPLETED"></core:Item>
+                                            <core:Item key="SUBMITTED" text="Submitted"></core:Item>
+                                            <core:Item key="SUCCESS" text="Success"></core:Item>
+                                            <core:Item key="ERROR" text="Error"></core:Item>
+                                            <core:Item key="COMPLETED" text="Completed"></core:Item>
                                         </items>
                                     </ComboBox>
                                 </filterbar:control>

@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:f4="sap.ui.comp.valuehelpdialog">
+	
+	<f4:ValueHelpDialog 	
+		beforeOpen="onDialogBeforeOpen"	
+		cancel="onValueHelpCancelPress"
+		afterClose="onValueHelpAfterClose"		
+		supportRanges="false">
+		<f4:subHeader>
+			<OverflowToolbar >
+				<SearchField search="onf4Search" showRefreshButton="true" ></SearchField>
+			</OverflowToolbar>
+		</f4:subHeader>				
+	</f4:ValueHelpDialog>
+</core:FragmentDefinition>

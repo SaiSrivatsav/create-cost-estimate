@@ -1,4 +1,4 @@
-<mvc:View controllerName="re.fin.createcostestimate.controller.ErrorDetail"
+<mvc:View xmlns:commons="sap.suite.ui.commons" controllerName="re.fin.createcostestimate.controller.ErrorDetail"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
@@ -15,23 +15,23 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle >
                 <uxap:expandedHeading>
-                    <Title text="Material" wrapping="true"></Title>
+                    <Title id="refin-titleHdrExp" text="" wrapping="true"></Title>
                 </uxap:expandedHeading>
 
                 <uxap:expandedContent>
-                    <Label text="Plant"></Label>
+                    <Label text=""></Label>
                 </uxap:expandedContent>
 
                 <uxap:snappedHeading>
                     <HBox >
                         <VBox >
                             <Avatar class="sapUiSmallMarginEnd" 
-                                    displayShape="Circle"
-                                    src="sap-icon://add-product"></Avatar>
+                                    displayShape="Square"
+                                    src="sap-icon://product"></Avatar>
                         </VBox>
                         <VBox >
-                            <Title text="Material" wrapping="true"></Title>
-                            <Label text="Plant"></Label>                         
+                            <Title id="refin-titleHdrSnap" text="" wrapping="true"></Title>
+                            <Label text=""></Label>                         
                         </VBox>
                     </HBox>
                 </uxap:snappedHeading>
@@ -43,13 +43,62 @@
         </uxap:headerTitle>
 
         <uxap:headerContent>
+        <HeaderContainer id="headerContainer" scrollStep="200" showDividers="false">    
             <HBox class="sapUiSmallMarginEnd">
                 <Avatar class="sapUiMediumMarginEnd sapUiSmallMarginBottom" 
                         displayShape="Circle"
                         displaySize="L"
-                        src="sap-icon://add-product">
+                        src="sap-icon://product">
                 </Avatar>
+
+                <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+				    <Title text="Material &amp; Plant Details" class="sapUiTinyMarginBottom" />
+					<HBox class="sapUiTinyMarginBottom">
+						<Label text="Material:" class="sapUiSmallMarginEnd"/>
+						<Text id="refin-idMatObjHdr" text="MT-00001 (Material description text)"/>
+					</HBox>
+
+					<HBox class="sapUiTinyMarginBottom" renderType="Bare">
+						<Label text="Plant:" class="sapUiSmallMarginEnd"/>
+						<Text id="refin-idPlantObjHdr" text="1234 (Plant description text)"/>
+					</HBox>
+				</VBox>
+
+                <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+				    <Title text="Costing Data Information" class="sapUiTinyMarginBottom" />
+					<HBox class="sapUiTinyMarginBottom">
+						<Label text="Costing Variant:" class="sapUiSmallMarginEnd"/>
+						<Text id="refin-idCostVarObjHdr" text="PPC1"/>
+					</HBox>
+
+					<HBox class="sapUiTinyMarginBottom" renderType="Bare">
+						<Label text="Costing Version:" class="sapUiSmallMarginEnd"/>
+						<Text id="refin-idCostVerObjHdr" text="0001"/>
+					</HBox>
+
+					<HBox class="sapUiTinyMarginBottom">
+						<Label text="Costing From Date:" class="sapUiSmallMarginEnd"/>
+						<Text id="refin-CostFrmDateObjHdr" text="19/03/2025"/>
+					</HBox>
+
+					<HBox renderType="Bare">
+						<Label text="Costing To Date:" class="sapUiSmallMarginEnd"/>
+						<Text id="refin-CostToDateObjHdr" text="31/03/2025"/>
+					</HBox>
+				</VBox>
+
+                <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+				    <Title text="Created On" class="sapUiTinyMarginBottom" />
+                    <ObjectStatus id="refin-idCreationDateHdr" text="19/03/2025" state="None" icon="" class="sapMObjectStatusLarge"/>
+				</VBox>
+
+                <VBox class="sapUiMediumMarginEnd sapUiSmallMarginBottom">
+					<Title text="Ageing" class="sapUiTinyMarginBottom" />
+					<ObjectStatus id="refin-idAgeingHdr" text="12 Days" state="Error" icon="sap-icon://in-progress" class="sapMObjectStatusLarge"/>
+				</VBox>
+                
             </HBox>
+        </HeaderContainer>
         </uxap:headerContent>
 
         <uxap:sections>
@@ -62,11 +111,12 @@
                             <Table id="refin-idErrorTable" alternateRowColors="false" mode="MultiSelect"  inset="false" items="{ErrorRecords>/}">
                                 <headerToolbar>
                                     <OverflowToolbar >
-                                        <Title text="Cost Estimate Records" level="H2"></Title>
+                                        <MessageStrip id="refin-idRefreshMsg" visible="false" text="Click on refresh for any changes in assignment of error codes to reflect back" showCloseButton="false" showIcon="true" type="Information"></MessageStrip>
+                                        <Title text="" level="H2"></Title>
                                         
                                         <ToolbarSpacer />                       
 
-                                        <Button id="refin-idErrRefresh" press="onRefresh" icon="sap-icon://refresh"></Button>
+                                        <Button id="refin-idMainRefresh" visible="false" press="onMainRefresh" icon="sap-icon://synchronize" type="Emphasized" text="Refresh"></Button>
                                         
                                         <SearchField id="refin-idErrSearch" width="30%" placeholder="Search for a error id / department" liveChange="onLiveSearch"></SearchField>
 
@@ -84,10 +134,6 @@
 
                                     <Column >
                                         <Text id="refin-idErrId" text="Error Id"></Text>
-                                    </Column>
-
-                                    <Column >
-                                        <Text id="refin-idErrType" text="Type"></Text>
                                     </Column>
 
                                     <Column >
@@ -115,6 +161,10 @@
                                     </Column>
 
                                     <Column >
+                                        <Text id="refin-idErrorAgeing" text="Ageing"></Text>
+                                    </Column>
+
+                                    <Column >
                                         <Text id="refin-idLastNotif" text="Last Notification Sent"></Text>
                                     </Column>
 
@@ -132,12 +182,10 @@
                                 </noData>
 
                                 <items>
-                                    <ColumnListItem vAlign="Middle" press="onItemNavigate" type="Navigation">
+                                    <ColumnListItem vAlign="Middle">
                                         <Text text="{ErrorRecords>referenceId}"></Text>
 
                                         <Text text="{ErrorRecords>errorId}"></Text>
-
-                                        <Text text="{ErrorRecords>type}"></Text>
                                         
                                         <Text text="{ErrorRecords>message}"></Text>                        
 
@@ -151,6 +199,8 @@
 
                                         <Text text="{ErrorRecords>resolvedOn}"></Text>
 
+                                        <ObjectStatus text="{ErrorRecords>ageingText}" state="Error" icon="sap-icon://in-progress-2"/>
+
                                         <Text text="{ErrorRecords>recentNotif}"></Text>
                                     
                                         <Button id="refin-idFollowUp" icon="sap-icon://email" press="onFollowUp" 
@@ -161,6 +211,12 @@
                                 </items>
                             </Table>
                         </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+
+                    <uxap:ObjectPageSubSection visible="true" titleUppercase="false" title="Summary">
+                        <commons:ProcessFlow >
+                            
+                        </commons:ProcessFlow>
                     </uxap:ObjectPageSubSection>
                 </uxap:subSections>
             </uxap:ObjectPageSection>

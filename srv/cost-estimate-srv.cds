@@ -5,4 +5,5 @@ using { costestimate.db as dbmodel } from '../db/cost-estimate-model';
 service CostTrackService{
     entity CostEstimateLog as projection on dbmodel.CostEstimateStatus;
     entity ErrorLogs as projection on dbmodel.ErrorLogs;
+    action   sendmail(sender : String, to : String, subject : String, body : String, destination : String) returns String;
 }
